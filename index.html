@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythos — Encyclopedia of Legends</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #080b12;
+  --panel: #101722;
+  --panel2: #151d29;
+  --gold: #d5aa55;
+  --gold-light: #f0d28b;
+  --text: #e9e6df;
+  --muted: #9da5b2;
+  --line: rgba(213,170,85,.22);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, sans-serif;
+}
+
+h1,h2,h3,h4,.logo,.serif {
+  font-family: Cinzel, serif;
+}
+
+button,input { font: inherit; }
+
+button { cursor: pointer; }
+
+/* NAVIGATION */
+
+.navbar {
+  height: 76px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7%;
+  border-bottom: 1px solid var(--line);
+  background: rgba(8,11,18,.96);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+}
+
+.logo {
+  font-size: 25px;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo span { font-size: 30px; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 13px;
+  transition: .3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.menu-btn {
+  display: none;
+  color: var(--gold);
+  background: none;
+  border: none;
+  font-size: 25px;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 490px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 70px 20px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(8,11,18,.95), rgba(8,11,18,.58), rgba(8,11,18,.85)),
+    url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=85")
+    center/cover;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg,var(--bg),transparent 25%,transparent 80%,var(--bg));
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 5px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(42px,7vw,78px);
+  line-height: 1.1;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  color: var(--gold-light);
+  font-style: normal;
+}
+
+.hero p {
+  color: #c0c4cb;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: auto;
+  max-width: 590px;
+}
+
+.hero-divider {
+  width: 130px;
+  height: 1px;
+  background: var(--gold);
+  margin: 28px auto;
+  position: relative;
+}
+
+.hero-divider::after {
+  content: "✦";
+  color: var(--gold);
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  background: var(--bg);
+  padding: 0 12px;
+  transform: translateX(-50%);
+}
+
+/* SEARCH */
+
+.search-box {
+  margin: 25px auto 0;
+  display: flex;
+  max-width: 550px;
+  background: #0a0e16;
+  border: 1px solid rgba(213,170,85,.5);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 0;
+  outline: none;
+  color: white;
+  background: transparent;
+}
+
+.search-box input::placeholder { color: #747c89; }
+
+.search-box button {
+  padding: 0 28px;
+  background: var(--gold);
+  color: #111;
+  border: none;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.search-box button:hover { background: var(--gold-light); }
+
+/* GENERAL SECTION */
+
+.section {
+  padding: 45px 7%;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 26px;
+}
+
+.section-heading .ornament {
+  color: var(--gold);
+  font-size: 24px;
+}
+
+.section-heading h2 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.section-heading .line {
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+
+.section-heading .view-all {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--gold);
+  border-radius: 3px;
+  padding: 9px 18px;
+}
+
+/* PANTHEONS */
+
+.pantheon-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+}
+
+.pantheon {
+  min-height: 170px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.pantheon:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+}
+
+.pantheon img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s;
+}
+
+.pantheon:hover img { transform: scale(1.07); }
+
+.pantheon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg,rgba(5,8,13,.95),rgba(5,8,13,.05));
+}
+
+.pantheon-info {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+.pantheon-info h3 {
+  font-size: 20px;
+  color: var(--gold-light);
+  margin-bottom: 7px;
+}
+
+.pantheon-info p {
+  color: #b7bdc6;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* FILTERS */
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.filter {
+  padding: 9px 17px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 12px;
+  transition: .2s;
+}
+
+.filter:hover,
+.filter.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #0b0d12;
+}
+
+/* CHARACTER CARDS */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 5px;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--line);
+}
+
+.card-img {
+  height: 230px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s;
+}
+
+.card:hover .card-img img { transform: scale(1.05); }
+
+.card-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg,var(--panel),transparent 45%);
+}
+
+.card-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  background: rgba(8,11,18,.85);
+  color: var(--gold);
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.card-body {
+  padding: 0 19px 20px;
+  margin-top: -12px;
+  position: relative;
+  z-index: 3;
+}
+
+.card-body h3 {
+  font-size: 21px;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+
+.card-body p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  min-height: 61px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  padding-top: 13px;
+}
+
+.card-footer span {
+  color: #7e8794;
+  font-size: 10px;
+}
+
+.card-footer button {
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  font-size: 12px;
+}
+
+.card-footer button:hover { color: white; }
+
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+
+/* FEATURE */
+
+.feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  margin-top: 30px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 25px;
+  border-radius: 5px;
+}
+
+.feature-image {
+  height: 360px;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.feature-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feature-text .eyebrow { margin-bottom: 12px; }
+
+.feature-text h2 {
+  font-size: 36px;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+}
+
+.feature-text p {
+  color: #aeb5bf;
+  line-height: 1.9;
+  font-size: 13px;
+}
+
+.feature-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 22px 0;
+}
+
+.fact {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.fact span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.fact strong {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gold-light);
+}
+
+.learn-btn {
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--gold);
+  padding: 12px 22px;
+  font-size: 12px;
+  transition: .3s;
+}
+
+.learn-btn:hover {
+  background: var(--gold);
+  color: #080b12;
+}
+
+/* QUOTE */
+
+.quote-section {
+  text-align: center;
+  padding: 70px 20px;
+  background:
+    linear-gradient(rgba(8,11,18,.94),rgba(8,11,18,.94)),
+    url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=80")
+    center/cover;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.quote-section .symbol {
+  font-size: 35px;
+  color: var(--gold);
+}
+
+.quote-section h2 {
+  max-width: 750px;
+  margin: 20px auto;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.quote-section p {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 35px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+}
+
+footer .logo { font-size: 18px; }
+
+footer p {
+  color: #68717e;
+  font-size: 11px;
+}
+
+footer a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+/* DETAIL MODAL */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  background: rgba(0,0,0,.82);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal.show { display: flex; }
+
+.modal-content {
+  max-width: 520px;
+  width: 100%;
+  background: var(--panel2);
+  border: 1px solid var(--gold);
+  padding: 30px;
+  border-radius: 6px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  color: var(--gold-light);
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  color: #b5bdc8;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.modal-close {
+  float: right;
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 25px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+  .pantheon-grid,.cards { grid-template-columns: repeat(2,1fr); }
+  .feature { grid-template-columns: 1fr; }
+  .feature-image { height: 300px; }
+}
+
+@media(max-width:650px) {
+  .navbar { padding: 0 5%; }
+  .logo { font-size: 18px; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    width: 100%;
+    background: #0c111a;
+    padding: 25px;
+    flex-direction: column;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-links.open { display: flex; }
+  .menu-btn { display: block; }
+  .hero { min-height: 440px; }
+  .hero h1 { font-size: 43px; }
+  .hero p { font-size: 13px; }
+  .section { padding: 35px 5%; }
+  .section-heading h2 { font-size: 20px; }
+  .pantheon-grid,.cards { grid-template-columns: 1fr; }
+  .pantheon { min-height: 150px; }
+  .card-img { height: 270px; }
+  .feature { padding: 15px; }
+  .feature-text h2 { font-size: 30px; }
+  .feature-image { height: 230px; }
+  .quote-section h2 { font-size: 20px; }
+  footer { justify-content: center; text-align: center; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+  <div class="logo"><span>♜</span> MYTHOS</div>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#pantheons">Pantheons</a>
+    <a href="#characters">Gods & Heroes</a>
+    <a href="#featured">Featured</a>
+    <a href="#about">About</a>
+  </div>
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="eyebrow">LEGENDS • GODS • CIVILIZATIONS</div>
+    <h1>Mythology <em>Encyclopedia</em></h1>
+    <p>
+      Discover the ancient worlds of gods, heroes, monsters, and legendary stories.
+      Explore the myths that shaped civilizations and inspired humanity.
+    </p>
+
+    <div class="hero-divider"></div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput"
+        placeholder="Search gods, heroes, creatures...">
+      <button onclick="searchCharacters()">Search</button>
+    </div>
+  </div>
+</section>
+
+<!-- PANTHEONS -->
+<section class="section" id="pantheons">
+  <div class="section-heading">
+    <span class="ornament">✦</span>
+    <h2>Explore Mythologies</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="pantheon-grid">
+
+    <div class="pantheon" onclick="filterBy('Greek')">
+      <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=700&q=80" alt="Greek ancient temple">
+      <div class="pantheon-info">
+        <h3>Greek</h3>
+        <p>Olympian gods, heroes, and ancient legends</p>
+      </div>
+    </div>
+
+    <div class="pantheon" onclick="filterBy('Norse')">
+      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80" alt="Nordic landscape">
+      <div class="pantheon-info">
+        <h3>Norse</h3>
+        <p>Asgard, Vikings, and the nine worlds</p>
+      </div>
+    </div>
+
+    <div class="pantheon" onclick="filterBy('Egyptian')">
+      <img src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=700&q=80" alt="Egyptian monuments">
+      <div class="pantheon-info">
+        <h3>Egyptian</h3>
+        <p>Pharaohs, divine beings, and the afterlife</p>
+      </div>
+    </div>
+
+    <div class="pantheon" onclick="filterBy('Japanese')">
+      <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=700&q=80" alt="Japanese shrine">
+      <div class="pantheon-info">
+        <h3>Japanese</h3>
+        <p>Kami, spirits, and ancient traditions</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHARACTERS -->
+<section class="section" id="characters">
+  <div class="section-heading">
+    <span class="ornament">✦</span>
+    <h2>Gods & Legendary Figures</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="filters">
+    <button class="filter active" onclick="filterBy('All',this)">All</button>
+    <button class="filter" onclick="filterBy('Greek',this)">Greek</button>
+    <button class="filter" onclick="filterBy('Norse',this)">Norse</button>
+    <button class="filter" onclick="filterBy('Egyptian',this)">Egyptian</button>
+    <button class="filter" onclick="filterBy('Japanese',this)">Japanese</button>
+  </div>
+
+  <div class="cards" id="cardsContainer"></div>
+  <div class="no-results" id="noResults">
+    <h3>No legends found</h3>
+    <p>Try another name or mythology category.</p>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="section" id="featured">
+  <div class="section-heading">
+    <span class="ornament">✦</span>
+    <h2>Legend of the Month</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="feature">
+    <div class="feature-image">
+      <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=85" alt="Ancient Greek temple">
+    </div>
+
+    <div class="feature-text">
+      <div class="eyebrow">KING OF OLYMPUS</div>
+      <h2>Zeus</h2>
+      <p>
+        Ruler of the Olympian gods, Zeus commanded the sky and thunder.
+        His symbols include the thunderbolt, eagle, and royal scepter.
+        He presided over divine order, hospitality, and justice,
+        though his myths also tell of conflicts and complicated relationships.
+      </p>
+
+      <div class="feature-facts">
+        <div class="fact">
+          <span>DOMAIN</span>
+          <strong>Sky & Thunder</strong>
+        </div>
+        <div class="fact">
+          <span>SYMBOL</span>
+          <strong>Thunderbolt & Eagle</strong>
+        </div>
+        <div class="fact">
+          <span>HOME</span>
+          <strong>Mount Olympus</strong>
+        </div>
+        <div class="fact">
+          <span>ROMAN NAME</span>
+          <strong>Jupiter</strong>
+        </div>
+      </div>
+
+      <button class="learn-btn" onclick="openCharacter('Zeus')">Explore Zeus →</button>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section" id="about">
+  <div class="symbol">❝</div>
+  <h2>“Myths are dreams of the world, stories that carry the wisdom, fears, and hopes of ancient civilizations.”</h2>
+  <p>EXPLORE THE UNKNOWN</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">♜ MYTHOS</div>
+  <p>Explore the ancient stories of humanity.</p>
+  <a href="#home">Back to top ↑</a>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal" onclick="closeOutside(event)">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+<script>
+const characters = [
+  {
+    name:"Zeus", mythology:"Greek", title:"King of the Gods",
+    image:"https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=700&q=80",
+    desc:"God of the sky, thunder, justice, and ruler of Mount Olympus.",
+    details:"Zeus was the leading god of the Olympian pantheon. Son of Cronus and Rhea, he led his siblings in overthrowing the Titans. His symbols included the thunderbolt, eagle, and oak tree. The Romans identified him with Jupiter."
+  },
+  {
+    name:"Athena", mythology:"Greek", title:"Goddess of Wisdom",
+    image:"https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=700&q=80",
+    desc:"Goddess of wisdom, strategy, crafts, and city protection.",
+    details:"Athena was associated with wisdom, strategic warfare, weaving, and crafts. She was the patron goddess of Athens and often appeared with an owl, helmet, spear, and shield."
+  },
+  {
+    name:"Poseidon", mythology:"Greek", title:"God of the Sea",
+    image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=700&q=80",
+    desc:"Ruler of the seas, storms, earthquakes, and horses.",
+    details:"Poseidon was one of the major Olympian gods. His trident was his most recognizable symbol. Sailors prayed to him for safe voyages, while myths also associated him with earthquakes and horses."
+  },
+  {
+    name:"Hades", mythology:"Greek", title:"Lord of the Underworld",
+    image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
+    desc:"God and ruler of the underworld and the realm of the dead.",
+    details:"Hades ruled the underworld, the realm where the dead resided. He was a brother of Zeus and Poseidon. His realm was commonly called the House of Hades, and his symbols included the helmet of invisibility and Cerberus."
+  },
+  {
+    name:"Odin", mythology:"Norse", title:"All-Father",
+    image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
+    desc:"God of wisdom, poetry, magic, war, and the dead.",
+    details:"Odin was a central figure in Norse mythology. He sought wisdom through sacrifice and knowledge, was associated with runes and poetry, and had two ravens named Huginn and Muninn."
+  },
+  {
+    name:"Thor", mythology:"Norse", title:"God of Thunder",
+    image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=700&q=80",
+    desc:"Protector of gods and humans, wielding the hammer Mjölnir.",
+    details:"Thor was the thunder god, known for his immense strength and protection of gods and humans. His hammer Mjölnir was a powerful weapon and symbol of protection."
+  },
+  {
+    name:"Loki", mythology:"Norse", title:"Trickster",
+    image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
+    desc:"A clever and unpredictable figure known for changing shape.",
+    details:"Loki was a complex figure in Norse mythology, known for cunning, shapeshifting, and causing trouble among the gods. His actions contributed to many major mythological events."
+  },
+  {
+    name:"Freya", mythology:"Norse", title:"Goddess of Love & Magic",
+    image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=700&q=80",
+    desc:"Goddess associated with love, beauty, magic, and battle.",
+    details:"Freya was a prominent goddess of the Vanir. She was associated with love, fertility, magic called seiðr, and battle. Her necklace Brísingamen was famous in myth."
+  },
+  {
+    name:"Anubis", mythology:"Egyptian", title:"Guardian of the Dead",
+    image:"https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=700&q=80",
+    desc:"Jackal-headed god of funerary rites and protection of tombs.",
+    details:"Anubis was associated with mummification and the protection of the dead. He played a role in funerary rituals and the weighing of the heart, guiding souls through the afterlife."
+  },
+  {
+    name:"Ra", mythology:"Egyptian", title:"God of the Sun",
+    image:"https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=700&q=80",
+    desc:"Solar deity whose journey brought light to the world.",
+    details:"Ra was one of the most important ancient Egyptian solar gods. He was believed to travel across the sky by day and through the underworld by night, renewing the sun's journey."
+  },
+  {
+    name:"Isis", mythology:"Egyptian", title:"Goddess of Magic",
+    image:"https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=700&q=80",
+    desc:"Goddess of magic, healing, motherhood, and protection.",
+    details:"Isis was revered for magical power, wisdom, devotion, and protection. Her stories include the search for Osiris and the protection of her son Horus."
+  },
+  {
+    name:"Horus", mythology:"Egyptian", title:"God of the Sky",
+    image:"https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=700&q=80",
+    desc:"Falcon-associated god linked to kingship and the sky.",
+    details:"Horus was an important sky god, often depicted as a falcon or a man with a falcon head. Egyptian kings were associated with Horus during life, linking royal authority with the divine."
+  },
+  {
+    name:"Amaterasu", mythology:"Japanese", title:"Sun Goddess",
+    image:"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=700&q=80",
+    desc:"Major Shinto kami associated with the sun and brightness.",
+    details:"Amaterasu is one of the most important kami in Japanese mythology. The story of her retreat into a cave and the return of light is a famous myth explaining the restoration of the sun."
+  },
+  {
+    name:"Susanoo", mythology:"Japanese", title:"Storm God",
+    image:"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=700&q=80",
+    desc:"Storm deity known for dramatic adventures and battles.",
+    details:"Susanoo is a storm kami and sibling of Amaterasu. His myths include banishment, encounters with the giant serpent Yamata no Orochi, and the discovery of a legendary sword."
+  },
+  {
+    name:"Tsukuyomi", mythology:"Japanese", title:"God of the Moon",
+    image:"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=700&q=80",
+    desc:"Lunar kami associated with the moon and night.",
+    details:"Tsukuyomi is a moon deity in Japanese mythology, associated with the night and the lunar cycle. He is commonly described as a sibling of Amaterasu and Susanoo."
+  },
+  {
+    name:"Kitsune", mythology:"Japanese", title:"Fox Spirit",
+    image:"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=700&q=80",
+    desc:"Spirit foxes known for intelligence and magical abilities.",
+    details:"Kitsune are supernatural foxes in Japanese folklore. Stories portray them as intelligent, magical, and capable of transformation. Some are associated with Inari, the kami of rice and prosperity."
+  }
+];
+
+const cardsContainer = document.getElementById("cardsContainer");
+let currentFilter = "All";
+let currentSearch = "";
+
+function renderCards() {
+  cardsContainer.innerHTML = "";
+
+  const filtered = characters.filter(c => {
+    const matchesFilter = currentFilter === "All" || c.mythology === currentFilter;
+    const searchText = (c.name + " " + c.mythology + " " + c.title + " " + c.desc).toLowerCase();
+    const matchesSearch = searchText.includes(currentSearch.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
+
+  document.getElementById("noResults").style.display =
+    filtered.length ? "none" : "block";
+
+  filtered.forEach(c => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="card-img">
+        <img src="${c.image}" alt="${c.name}" loading="lazy">
+        <span class="card-tag">${c.mythology}</span>
+      </div>
+      <div class="card-body">
+        <h3>${c.name}</h3>
+        <p>${c.desc}</p>
+        <div class="card-footer">
+          <span>${c.title}</span>
+          <button onclick="openCharacter('${c.name}')">Discover →</button>
+        </div>
+      </div>
+    `;
+
+    cardsContainer.appendChild(card);
+  });
+}
+
+function filterBy(mythology, button) {
+  currentFilter = mythology;
+  currentSearch = "";
+  document.getElementById("searchInput").value = "";
+
+  document.querySelectorAll(".filter").forEach(btn => btn.classList.remove("active"));
+
+  if (button) {
+    button.classList.add("active");
+  } else {
+    document.querySelectorAll(".filter").forEach(btn => {
+      if (btn.textContent.trim() === mythology) btn.classList.add("active");
+      if (mythology === "All" && btn.textContent.trim() === "All") btn.classList.add("active");
+    });
+  }
+
+  renderCards();
+  document.getElementById("characters").scrollIntoView({behavior:"smooth"});
+}
+
+function searchCharacters() {
+  currentSearch = document.getElementById("searchInput").value.trim();
+  currentFilter = "All";
+  document.querySelectorAll(".filter").forEach(btn => btn.classList.remove("active"));
+  document.querySelectorAll(".filter")[0].classList.add("active");
+  renderCards();
+  document.getElementById("characters").scrollIntoView({behavior:"smooth"});
+}
+
+document.getElementById("searchInput").addEventListener("keydown", e => {
+  if(e.key === "Enter") searchCharacters();
+});
+
+function openCharacter(name) {
+  const character = characters.find(c => c.name === name);
+  if (!character) return;
+
+  document.getElementById("modalTitle").textContent = character.name + " — " + character.title;
+  document.getElementById("modalText").textContent = character.details;
+  document.getElementById("modal").classList.add("show");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("show");
+}
+
+function closeOutside(event) {
+  if(event.target.id === "modal") closeModal();
+}
+
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("open");
+}
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.remove("open");
+  });
+});
+
+renderCards();
+</script>
+
+</body>
+</html>
